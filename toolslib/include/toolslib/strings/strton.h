@@ -133,8 +133,11 @@ namespace toolslib
 
 			if (s >= end)
 			{
-				*endptr = end;
-				_STRTON_ERROR_RETURN(std::string(nptr, end-nptr), EINVAL);
+				if (!ISDIGIT(c) && !ISALPHA(c))
+				{
+					*endptr = end;
+					_STRTON_ERROR_RETURN(std::string(nptr, end - nptr), EINVAL);
+				}
 			}
 
 			if (c == '-')
@@ -262,8 +265,12 @@ namespace toolslib
 
 			if (s >= end)
 			{
-				*endptr = end;
-				_STRTON_ERROR_RETURN(std::string(nptr, end - nptr), EINVAL);
+				// This would trigger if we have only a single digit
+				if (!ISDIGIT(c) && !ISALPHA(c))
+				{
+					*endptr = end;
+					_STRTON_ERROR_RETURN(std::string(nptr, end - nptr), EINVAL);
+				}
 			}
 
 			if (c == '-')
