@@ -563,6 +563,38 @@ namespace
 		EXPECT_EQ(1u, ui);
 		EXPECT_EQ(end, &nr[nr.size()]);
 
+		nr = "5";
+		str = &nr[0];
+		end = &nr[nr.size()];
+		scanned = nullptr;
+
+		i = -1;
+		ui = (uint16_t)-1;
+		EXPECT_NO_THROW((i = fromDecimal<int16_t>(str, end, &scanned)));
+		EXPECT_EQ(end, scanned);
+		EXPECT_NO_THROW((ui = fromDecimal<uint16_t>(str, end, &scanned)));
+		EXPECT_EQ(end, scanned);
+
+		EXPECT_EQ(5, i);
+		EXPECT_EQ(5u, ui);
+		EXPECT_EQ(end, &nr[nr.size()]);
+
+		nr = "";
+		str = &nr[0];
+		end = &nr[nr.size()];
+		scanned = nullptr;
+
+		i = -1;
+		ui = (uint16_t)-1;
+		EXPECT_THROW((i = fromDecimal<int16_t>(str, end, &scanned)), invalid_argument);
+		EXPECT_EQ(end, scanned);
+		EXPECT_THROW((ui = fromDecimal<uint16_t>(str, end, &scanned)), invalid_argument);
+		EXPECT_EQ(end, scanned);
+
+		EXPECT_EQ(-1, i);
+		EXPECT_EQ((uint16_t)-1, ui);
+		EXPECT_EQ(end, &nr[nr.size()]);
+
 		nr = "0x";
 		str = &nr[0];
 		end = &nr[nr.size()];
