@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "toolslib/files/ZIPFile.h"
-#include "toolslib/string/Helpers.h"
+#include "toolslib/strings/Helpers.h"
 
 #define CASESENSITIVITY (0)
 

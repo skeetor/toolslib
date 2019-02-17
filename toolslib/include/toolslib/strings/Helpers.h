@@ -37,6 +37,9 @@ size_t TOOLSLIB_API  findFirstSubstring(std::string const &oString, std::vector<
  */
 size_t TOOLSLIB_API filter(std::vector<std::string> &oArray, std::string const &oFilter, bool bCaseSensitive = true, bool bExclude = true);
 
+long TOOLSLIB_API strtol(const char *nptr, const char *end, const char **endptr, register int base);
+int TOOLSLIB_API strtoi(const char *nptr, const char *end, const char **endptr, register int base);
+
 // static locals for inlining
 namespace
 {

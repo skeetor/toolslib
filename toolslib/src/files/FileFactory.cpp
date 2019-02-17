@@ -8,8 +8,8 @@
 #include "toolslib/files/ZIPFile.h"
 #include "toolslib/files/ZIPScanner.h"
 
-#include <toolslib/string/Wildcards.h>
-#include <toolslib/string/Helpers.h>
+#include <toolslib/strings/Wildcards.h>
+#include <toolslib/strings/Helpers.h>
 
 namespace toolslib
 {

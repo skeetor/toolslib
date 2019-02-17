@@ -16,7 +16,7 @@
     <summary>See project URL for details.</summary>
   </metadata>
   <files>
-    <file src="..\.git\refs\heads\master" target="build\master" />
+    <file src=".git\refs\heads\master" target="build\master" />
     <file src="toolslib.targets" target="build\native\toolslib.targets"/>
     <file src="toolslib\include\**" target="build\native\include" />
 

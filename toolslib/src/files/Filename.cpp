@@ -6,8 +6,8 @@
 
 #include "toolslib/toolslib_def.h"
 #include "toolslib/files/Filename.h"
-#include "toolslib/string/Helpers.h"
-#include "toolslib/string/Wildcards.h"
+#include "toolslib/strings/Helpers.h"
+#include "toolslib/strings/Wildcards.h"
 
 namespace toolslib
 {

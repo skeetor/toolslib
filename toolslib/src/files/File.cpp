@@ -38,6 +38,54 @@ File::File(Filename const &oFilename, FILE *oFile, const IFile::open_mode &mode,
 	mFileHandle = oFile;
 }
 
+File *File::setSTDIN(FILE *oStdIn)
+{
+	open_mode md =
+	{
+		true,
+		true,
+		false,
+		false,
+		false,
+		false,
+		false
+	};
+
+	setFilename("stdin");
+	setOpenmode(md);
+	setEOF(false);
+	allocateFileBuffer(setFileBufferSize());
+	setIsOpen(true);
+	mDoClose = false;
+	mFileHandle = oStdIn;
+
+	return this;
+}
+
+File *File::setSTDOUT(FILE *oStdOut)
+{
+	open_mode md =
+	{
+		true,
+		false,
+		true,
+		false,
+		false,
+		false,
+		false
+	};
+
+	setFilename("stdout");
+	setOpenmode(md);
+	setEOF(false);
+	allocateFileBuffer(setFileBufferSize());
+	setIsOpen(true);
+	mDoClose = false;
+	mFileHandle = oStdOut;
+
+	return this;
+}
+
 void File::init(void)
 {
 	mDoClose = false;

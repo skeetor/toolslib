@@ -38,6 +38,7 @@ public:
 
 	void close(void) override;
 	bool isEOF(void) const override;
+	bool isSeekable(void) const;
 
 	void setFilename(Filename const &oFilename) override;
 	const Filename &getFilename(void) const override;
@@ -88,9 +89,14 @@ protected:
 	virtual char *allocateFileBuffer(int64_t nSize);
 	virtual void freeFileBuffer(char *oFileBuffer);
 	char *getFileBuffer(void) const override;
-	inline void setFileBuffer(char *oFileBuffer)
+	void setFileBuffer(char *oFileBuffer)
 	{
 		mFileBuffer = oFileBuffer;
+	}
+
+	void setSeekable(bool bSeekable)
+	{
+		mOpenmode.seekable = bSeekable;
 	}
 
 	void setIsOpen(bool bIsOpen = true)
