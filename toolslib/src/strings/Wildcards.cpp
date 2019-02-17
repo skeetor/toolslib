@@ -1,5 +1,5 @@
 
-#include <toolslib/string/Wildcards.h>
+#include <toolslib/strings/Wildcards.h>
 
 namespace toolslib
 {

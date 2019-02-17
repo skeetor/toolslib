@@ -135,6 +135,7 @@
     <ClCompile Include="TestCommandlineParser.cpp" />
     <ClCompile Include="TestFileFactory.cpp" />
     <ClCompile Include="TestMemoryFile.cpp" />
+    <ClCompile Include="TestNumbers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

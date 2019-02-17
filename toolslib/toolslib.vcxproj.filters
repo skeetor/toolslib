@@ -28,10 +28,10 @@
     <Filter Include="Source Files\files">
       <UniqueIdentifier>{4e25941e-d8bc-4b41-85e3-5bc2a8803bc8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\string">
+    <Filter Include="Header Files\strings">
       <UniqueIdentifier>{fc05072b-ffa0-4344-94ec-b9b454338648}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\string">
+    <Filter Include="Source Files\strings">
       <UniqueIdentifier>{2b3cdf71-996c-41c5-b9dc-2c8a8c2ab86f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\compression">
@@ -99,8 +99,8 @@
     <ClInclude Include="include\toolslib\files\FilesystemScanner.h">
       <Filter>Header Files\files</Filter>
     </ClInclude>
-    <ClInclude Include="include\toolslib\string\Wildcards.h">
-      <Filter>Header Files\string</Filter>
+    <ClInclude Include="include\toolslib\strings\Wildcards.h">
+      <Filter>Header Files\strings</Filter>
     </ClInclude>
     <ClInclude Include="include\toolslib\compression\zlib\deflate.h">
       <Filter>Header Files\compression\zlib</Filter>
@@ -153,14 +153,20 @@
     <ClInclude Include="include\toolslib\compression\zlib\minizip\zip.h">
       <Filter>Header Files\compression\zlib\minizip</Filter>
     </ClInclude>
-    <ClInclude Include="include\toolslib\string\Helpers.h">
-      <Filter>Header Files\string</Filter>
+    <ClInclude Include="include\toolslib\strings\Helpers.h">
+      <Filter>Header Files\strings</Filter>
     </ClInclude>
     <ClInclude Include="include\toolslib\files\ZIPScanner.h">
       <Filter>Header Files\files</Filter>
     </ClInclude>
     <ClInclude Include="include\toolslib\files\MemoryFile.h">
       <Filter>Header Files\files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\toolslib\strings\numbers.h">
+      <Filter>Header Files\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="include\toolslib\strings\strton.h">
+      <Filter>Header Files\strings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -188,8 +194,8 @@
     <ClCompile Include="src\files\FilesystemScanner.cpp">
       <Filter>Source Files\files</Filter>
     </ClCompile>
-    <ClCompile Include="src\string\Wildcards.cpp">
-      <Filter>Source Files\string</Filter>
+    <ClCompile Include="src\strings\Wildcards.cpp">
+      <Filter>Source Files\strings</Filter>
     </ClCompile>
     <ClCompile Include="src\compression\zlib\minizip\ioapi.c">
       <Filter>Source Files\compression\zlib\minizip</Filter>
@@ -260,8 +266,8 @@
     <ClCompile Include="src\compression\zlib\zutil.c">
       <Filter>Source Files\compression\zlib</Filter>
     </ClCompile>
-    <ClCompile Include="src\string\Helpers.cpp">
-      <Filter>Source Files\string</Filter>
+    <ClCompile Include="src\strings\Helpers.cpp">
+      <Filter>Source Files\strings</Filter>
     </ClCompile>
     <ClCompile Include="src\files\ZIPScanner.cpp">
       <Filter>Source Files\files</Filter>
@@ -271,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="src\files\IFile.cpp">
       <Filter>Source Files\files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\strings\strton.cpp">
+      <Filter>Source Files\strings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

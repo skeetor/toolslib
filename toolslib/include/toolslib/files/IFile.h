@@ -49,12 +49,13 @@ public:
 	class open_mode
 	{
 		public:
-			bool binary;
-			bool read;
-			bool write;
-			bool append;
-			bool create;
-			bool truncate;
+			bool binary : 1;
+			bool read : 1;
+			bool write : 1;
+			bool append : 1;
+			bool create : 1;
+			bool truncate : 1;
+			bool seekable : 1;
 
 			static open_mode init(void)
 			{
@@ -66,6 +67,7 @@ public:
 				md.append = false;
 				md.create = false;
 				md.truncate = false;
+				md.seekable = false;
 
 				return md;
 			}

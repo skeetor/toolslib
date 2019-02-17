@@ -4,7 +4,7 @@
 #include <algorithm>
 
 #include "toolslib/files/ZIPScanner.h"
-#include "toolslib/string/Helpers.h"
+#include "toolslib/strings/Helpers.h"
 
 namespace toolslib
 {

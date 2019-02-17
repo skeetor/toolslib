@@ -43,10 +43,25 @@ public:
 	int64_t length(void) override;
 	int getChar(void) override;
 
+public:
 	/**
 	 * Convert the fopen() mode string to the internal mode.
 	 */
 	static IFile::open_mode openMode(std::string const &oMode);
+
+	/**
+	 * Sets the file as the FILE and also sets additional attributes (like openmode and name).
+	 * This is a shortcut to manually using File(FILE) constructor. The FILE
+	 * should be stdin, but this is not validated.
+	 */
+	File *setSTDIN(FILE *oStdIn);
+
+	/**
+	 * Sets the file as the FILE and also sets additional attributes (like openmode and name).
+	 * This is a shortcut to manually using File(FILE) constructor. The FILE
+	 * should be stdout, but this is not validated.
+	 */
+	File *setSTDOUT(FILE *oStdOut);
 
 protected:
 	virtual FILE *getFileHandle(void) const;
