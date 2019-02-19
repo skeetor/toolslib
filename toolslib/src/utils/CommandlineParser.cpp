@@ -17,16 +17,19 @@ namespace toolslib
 	{
 		CommandlineParser::CommandlineParser(bool strict)
 		: mStrict(strict)
-		, m_argc(0)
-		, m_argv(nullptr)
 		{
 			mOptions.emplace_back(Option().name("").arguments((uint32_t)-1, (uint32_t)-1));
 		}
 
+		CommandlineParser::CommandlineParser(const vector<string> &oArguments, bool strict)
+		: mStrict(strict)
+		, mArguments(oArguments)
+		{
+		}
+
 		CommandlineParser::CommandlineParser(int argc, char **argv, bool strict)
-		: m_argc(argc)
-		, m_argv(argv)
-		, mStrict(strict)
+		: mStrict(strict)
+		, mArguments(toArguments(argc, argv))
 		{
 		}
 
@@ -241,28 +244,33 @@ namespace toolslib
 			return true;
 		}
 
-		bool CommandlineParser::parse(int argc, char *argv[])
+		vector<string> CommandlineParser::toArguments(int argc, char *argv[])
 		{
 			vector<string> args;
 			args.reserve(argc - 1);
 
 			for (int i = 1; i < argc; i++)
 			{
-				if(argv[i])
+				if (argv[i])
 					args.push_back(argv[i]);
 				else
 					args.push_back("");
 			}
 
-			return parse(args);
+			return args;
+		}
+
+		bool CommandlineParser::parse(int argc, char *argv[])
+		{
+			return parse(toArguments(argc, argv));
 		}
 
 		bool CommandlineParser::parse(void)
 		{
-			if (m_argc == 0)
+			if (mArguments.empty())
 				return false;
 
-			return parse(m_argc, m_argv);
+			return parse(mArguments);
 		}
 
 		void CommandlineParser::reset()

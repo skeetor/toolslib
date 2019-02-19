@@ -282,6 +282,7 @@ namespace toolslib
 			 */
 			CommandlineParser(bool strict = true);
 			CommandlineParser(int argc, char **argv, bool strict = true);
+			CommandlineParser(const std::vector<std::string> &oArguments, bool strict = true);
 			virtual ~CommandlineParser();
 
 			/**
@@ -360,6 +361,7 @@ namespace toolslib
 			bool isStrict() const { return mStrict; }
 			void setStrict(bool strict = true) { mStrict = strict; }
 
+			std::vector<std::string> toArguments(int argc, char *argv[]);
 			const std::vector<Option>& getOptions() const;
 			const Option *findName(const std::string& oName) const;
 			const Option *findParam(const std::string& oName) const;
@@ -367,9 +369,8 @@ namespace toolslib
 			bool isParam(const std::string& param) const;
 
 		private:
-			int m_argc;
-			char **m_argv;
 			std::vector<Option> mOptions;
+			std::vector<std::string> mArguments;
 			bool mStrict : 1;
 			uint32_t mErrorIndex;
 			std::string mErrorParam;
