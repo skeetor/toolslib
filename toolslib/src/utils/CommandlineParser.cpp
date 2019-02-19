@@ -17,8 +17,17 @@ namespace toolslib
 	{
 		CommandlineParser::CommandlineParser(bool strict)
 		: mStrict(strict)
+		, m_argc(0)
+		, m_argv(nullptr)
 		{
 			mOptions.emplace_back(Option().name("").arguments((uint32_t)-1, (uint32_t)-1));
+		}
+
+		CommandlineParser::CommandlineParser(int argc, char **argv, bool strict)
+		: m_argc(argc)
+		, m_argv(argv)
+		, mStrict(strict)
+		{
 		}
 
 		CommandlineParser::~CommandlineParser()
@@ -246,6 +255,14 @@ namespace toolslib
 			}
 
 			return parse(args);
+		}
+
+		bool CommandlineParser::parse(void)
+		{
+			if (m_argc == 0)
+				return false;
+
+			return parse(m_argc, m_argv);
 		}
 
 		void CommandlineParser::reset()

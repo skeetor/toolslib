@@ -281,6 +281,7 @@ namespace toolslib
 			 * This can be used when mixing paramters with names and without names.
 			 */
 			CommandlineParser(bool strict = true);
+			CommandlineParser(int argc, char **argv, bool strict = true);
 			virtual ~CommandlineParser();
 
 			/**
@@ -296,6 +297,7 @@ namespace toolslib
 			 */
 			bool parse(const std::vector<std::string>& argv);
 			bool parse(int argc, char *argv[]);
+			bool parse(void);
 
 			/**
 			 * Sets a header line, which is used for the help() method.
@@ -365,6 +367,8 @@ namespace toolslib
 			bool isParam(const std::string& param) const;
 
 		private:
+			int m_argc;
+			char **m_argv;
 			std::vector<Option> mOptions;
 			bool mStrict : 1;
 			uint32_t mErrorIndex;
