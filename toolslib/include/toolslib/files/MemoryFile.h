@@ -19,6 +19,9 @@ class TOOLSLIB_API MemoryFile
 : public virtual BaseFile
 {
 public:
+	using IFile::open;
+	using IFile::getFilename;
+
 	MemoryFile(Filename const &oFilename = "");
 	~MemoryFile(void) override;
 
