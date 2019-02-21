@@ -369,6 +369,9 @@ namespace toolslib
 			bool isParam(const std::string& param) const;
 
 		private:
+			void init(void);
+
+		private:
 			std::vector<Option> mOptions;
 			std::vector<std::string> mArguments;
 			bool mStrict : 1;

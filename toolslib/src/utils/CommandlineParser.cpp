@@ -18,23 +18,30 @@ namespace toolslib
 		CommandlineParser::CommandlineParser(bool strict)
 		: mStrict(strict)
 		{
-			mOptions.emplace_back(Option().name("").arguments((uint32_t)-1, (uint32_t)-1));
+			init();
 		}
 
 		CommandlineParser::CommandlineParser(const vector<string> &oArguments, bool strict)
 		: mStrict(strict)
 		, mArguments(oArguments)
 		{
+			init();
 		}
 
 		CommandlineParser::CommandlineParser(int argc, char **argv, bool strict)
 		: mStrict(strict)
 		, mArguments(toArguments(argc, argv))
 		{
+			init();
 		}
 
 		CommandlineParser::~CommandlineParser()
 		{
+		}
+
+		void CommandlineParser::init(void)
+		{
+			mOptions.emplace_back(Option().name("").arguments((uint32_t)-1, (uint32_t)-1));
 		}
 
 		uint32_t CommandlineParser::getErrorIndex() const
