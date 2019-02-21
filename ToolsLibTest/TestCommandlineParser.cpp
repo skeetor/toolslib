@@ -47,7 +47,7 @@ namespace
 
 		vector<string> args =
 		{
-			"file1"
+			"TEST.EXE", "file1"
 		};
 		EXPECT_NO_THROW(parse(args));
 		o = &getUnnamed();
@@ -61,7 +61,7 @@ namespace
 		// Calling parse a second time will reset any previously parsed parameters
 		args =
 		{
-			"--param", "file2"
+			"TEST.EXE", "--param", "file2"
 		};
 		bool parsing = false;
 		EXPECT_NO_THROW((parsing = parse(args)));
@@ -102,7 +102,7 @@ namespace
 		EXPECT_TRUE(parse(args));
 		args =
 		{
-			"test"
+			"TEST.EXE", "test"
 		};
 		EXPECT_TRUE(parse(args));
 		EXPECT_FALSE(hasArgument("enableFeature"));
@@ -119,7 +119,7 @@ namespace
 		EXPECT_TRUE(parse(args));
 		args =
 		{
-			"test"
+			"TEST.EXE", "test"
 		};
 		EXPECT_FALSE(parse(args));
 		EXPECT_FALSE(hasArgument("enableFeature"));
@@ -130,7 +130,7 @@ namespace
 		addOption("enableFeature", "s", "Path to the home directory");
 		vector<string> args =
 		{
-			"--enableFeature"
+			"TEST.EXE", "--enableFeature"
 		};
 
 		const vector<vector<string>> *params = nullptr;
@@ -149,7 +149,7 @@ namespace
 		addOption("enableFeature", "s", "Path to the home directory");
 		vector<string> args =
 		{
-			"--enableFeatures"
+			"TEST.EXE", "--enableFeatures"
 		};
 
 		const vector<vector<string>> *params = nullptr;
@@ -163,7 +163,7 @@ namespace
 		addOption("enableFeature", "s", "Path to the home directory");
 		vector<string> args =
 		{
-			"--enableFeature", "--enableFeature"
+			"TEST.EXE", "--enableFeature", "--enableFeature"
 		};
 
 		EXPECT_FALSE(parse(args));
@@ -180,7 +180,7 @@ namespace
 			.multiple();
 		vector<string> args =
 		{
-			"--enableFeature", "--enableFeature"
+			"TEST.EXE", "--enableFeature", "--enableFeature"
 		};
 
 		const vector<vector<string>> *params = nullptr;
@@ -205,7 +205,7 @@ namespace
 			.arguments();
 		vector<string> args =
 		{
-			"--enableFeature"
+			"TEST.EXE", "--enableFeature"
 		};
 
 		EXPECT_FALSE(parse(args));
@@ -219,7 +219,7 @@ namespace
 			;
 		vector<string> args =
 		{
-			"--enableFeature", "1", "2"
+			"TEST.EXE", "--enableFeature", "1", "2"
 			,"--enableFeature", "0"
 		};
 
@@ -237,7 +237,7 @@ namespace
 			;
 		vector<string> args =
 		{
-			"--enableFeature", "1"
+			"TEST.EXE", "--enableFeature", "1"
 		};
 
 		const vector<vector<string>> *params = nullptr;
@@ -256,7 +256,7 @@ namespace
 			;
 		vector<string> args =
 		{
-			"--enableFeature", "1"
+			"TEST.EXE", "--enableFeature", "1"
 			,"--enableFeature", "0", "2"
 		};
 
@@ -278,7 +278,7 @@ namespace
 			;
 		vector<string> args =
 		{
-			"--enableFeature", "1"
+			"TEST.EXE", "--enableFeature", "1"
 			,"--enableFeature", "0", "2"
 		};
 
@@ -308,7 +308,7 @@ namespace
 		;
 		vector<string> args =
 		{
-			"--enableFeature", "1"
+			"TEST.EXE", "--enableFeature", "1"
 			,"--enableFeature", "0"
 		};
 
@@ -338,7 +338,7 @@ namespace
 			;
 		vector<string> args =
 		{
-			"-s", "1"
+			"TEST.EXE", "-s", "1"
 			,"-s", "0"
 		};
 
@@ -408,7 +408,7 @@ namespace
 
 		vector<string> args =
 		{
-			"--param1", "0"
+			"TEST.EXE", "--param1", "0"
 			,"--param2", "1", "2"
 		};
 

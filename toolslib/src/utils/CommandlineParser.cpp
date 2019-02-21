@@ -249,7 +249,7 @@ namespace toolslib
 			vector<string> args;
 			args.reserve(argc - 1);
 
-			for (int i = 1; i < argc; i++)
+			for (int i = 0; i < argc; i++)
 			{
 				if (argv[i])
 					args.push_back(argv[i]);
@@ -294,7 +294,8 @@ namespace toolslib
 			int param_pos = -1;
 			string cur_param;
 
-			for (size_t i = 0; i < args.size(); i++)
+			// First argument is the executable.
+			for (size_t i = 1; i < args.size(); i++)
 			{
 				param_pos++;
 
