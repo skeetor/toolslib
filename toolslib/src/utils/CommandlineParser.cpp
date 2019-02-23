@@ -41,7 +41,7 @@ namespace toolslib
 
 		void CommandlineParser::init(void)
 		{
-			mOptions.emplace_back(Option().name("").arguments((uint32_t)-1, (uint32_t)-1));
+			mOptions.emplace_back(Option().name("").arguments(UNLIMITED_ARGS, UNLIMITED_ARGS));
 		}
 
 		uint32_t CommandlineParser::getErrorIndex() const
@@ -80,11 +80,11 @@ namespace toolslib
 				else
 					cout << " O";
 
-				if (o.minArguments() != -1 || o.maxArguments() != -1)
+				if (o.minArguments() != UNLIMITED_ARGS || o.maxArguments() != UNLIMITED_ARGS)
 				{
-					if (o.minArguments() == -1)
+					if (o.minArguments() == UNLIMITED_ARGS)
 						cout << " * ... " << to_string(o.maxArguments());
-					else if (o.maxArguments() == -1)
+					else if (o.maxArguments() == UNLIMITED_ARGS)
 						cout << o.minArguments() << " ... N";
 					else
 						cout << o.minArguments() << " ... " << o.maxArguments();
@@ -220,16 +220,16 @@ namespace toolslib
 			int32_t maxargs = oOption.maxArguments();
 
 			// This option allows any number of parameters 0..N, so it is always ok.
-			if (minargs == -1 && maxargs == -1)
+			if (minargs == UNLIMITED_ARGS && maxargs == UNLIMITED_ARGS)
 				return true;
 
 			for (vector<string> params : values)
 			{
 				int size = (int)params.size();
-				if (minargs != -1 && size < minargs)
+				if (minargs != UNLIMITED_ARGS && size < minargs)
 					return false;
 
-				if (maxargs != -1 && size > maxargs)
+				if (maxargs != UNLIMITED_ARGS && size > maxargs)
 					return false;
 			}
 
@@ -241,10 +241,10 @@ namespace toolslib
 			{
 				const vector<string>& params = values.back();
 				int size = (int)params.size() + nAdditionals;
-				if (minargs != -1 && size < minargs)
+				if (minargs != UNLIMITED_ARGS && size < minargs)
 					return false;
 
-				if (maxargs != -1 && size > maxargs)
+				if (maxargs != UNLIMITED_ARGS && size > maxargs)
 					return false;
 			}
 
@@ -282,7 +282,7 @@ namespace toolslib
 
 		void CommandlineParser::reset()
 		{
-			mErrorIndex = (uint32_t)-1;
+			mErrorIndex = UNLIMITED_ARGS;
 			mErrorParam = "";
 
 			for (Option &o : mOptions)
@@ -364,7 +364,7 @@ namespace toolslib
 				}
 
 				uint32_t max = current->maxArguments();
-				if (max != -1 && current->getLatest().size() >= max)
+				if (max != UNLIMITED_ARGS && current->getLatest().size() >= max)
 				{
 					arg_count = 0;
 					prev = current;

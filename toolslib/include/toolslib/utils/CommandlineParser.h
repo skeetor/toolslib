@@ -32,6 +32,9 @@ namespace toolslib
 		class TOOLSLIB_API CommandlineParser
 		{
 		public:
+			static const uint32_t UNLIMITED_ARGS = (uint32_t)-1;
+
+		public:
 			class TOOLSLIB_API Option
 			{
 				friend CommandlineParser;
