@@ -11,8 +11,8 @@ using namespace toolslib::utils;
 namespace
 {
 	class TCommandlineParser
-	: public CommandlineParser
-	, public ::testing::Test
+		: public CommandlineParser
+		, public ::testing::Test
 	{
 	public:
 		TCommandlineParser() {}
@@ -89,7 +89,7 @@ namespace
 		EXPECT_EQ("s", option.param());
 	}
 
-	TEST_F(TCommandlineParser, ParamterNotGivenRelaxed)
+	TEST_F(TCommandlineParser, NotGivenRelaxed)
 	{
 		setStrict(false);
 
@@ -108,7 +108,7 @@ namespace
 		EXPECT_FALSE(hasArgument("enableFeature"));
 	}
 
-	TEST_F(TCommandlineParser, ParamterNotGivenStrict)
+	TEST_F(TCommandlineParser, NotGivenStrict)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.optional();
@@ -125,7 +125,7 @@ namespace
 		EXPECT_FALSE(hasArgument("enableFeature"));
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithNoArgs)
+	TEST_F(TCommandlineParser, NoArgs)
 	{
 		addOption("enableFeature", "s", "Path to the home directory");
 		vector<string> args =
@@ -144,7 +144,7 @@ namespace
 		ASSERT_EQ(0u, values->size());
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithNoArgsWrongName)
+	TEST_F(TCommandlineParser, NoArgsWrongName)
 	{
 		addOption("enableFeature", "s", "Path to the home directory");
 		vector<string> args =
@@ -174,7 +174,7 @@ namespace
 		EXPECT_THROW(getArgument("enableFeature", 2), invalid_argument);
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithNoArgsMultiple)
+	TEST_F(TCommandlineParser, NoArgsMultiple)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.multiple();
@@ -199,7 +199,7 @@ namespace
 		EXPECT_THROW((values = &getArgument("enableFeature", 2)), invalid_argument);
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithSingleMissingArgument)
+	TEST_F(TCommandlineParser, SingleMissingArgument)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.arguments();
@@ -211,7 +211,7 @@ namespace
 		EXPECT_FALSE(parse(args));
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMultipleTooMany1)
+	TEST_F(TCommandlineParser, MultipleTooMany1)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.multiple()
@@ -230,7 +230,7 @@ namespace
 		ASSERT_EQ(1u, params->size());
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMissingArgument)
+	TEST_F(TCommandlineParser, MissingArgument)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.arguments(2, 2)
@@ -247,7 +247,7 @@ namespace
 		ASSERT_EQ(1u, params->size());
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMultipleTooManyStrict)
+	TEST_F(TCommandlineParser, MultipleTooManyStrict)
 	{
 		setStrict(true);
 		addOption("enableFeature", "s", "Path to the home directory")
@@ -267,7 +267,7 @@ namespace
 		ASSERT_EQ(2u, params->size());
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMultipleTooMany2)
+	TEST_F(TCommandlineParser, MultipleTooMany2)
 	{
 		// extra values at the end are considered unnamed arguments
 		setStrict(false);
@@ -300,12 +300,12 @@ namespace
 		EXPECT_EQ(1u, getUnnamed().values().size());
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMultiple)
+	TEST_F(TCommandlineParser, MultipleSameParams)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.multiple()
 			.arguments()
-		;
+			;
 		vector<string> args =
 		{
 			"TEST.EXE", "--enableFeature", "1"
@@ -330,7 +330,7 @@ namespace
 		EXPECT_THROW((values = &getArgument("enableFeature", 2)), invalid_argument);
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMultipleUsingShortcut)
+	TEST_F(TCommandlineParser, MultipleUsingShortcut)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.multiple()
@@ -360,7 +360,7 @@ namespace
 		EXPECT_THROW((values = &getArgument("enableFeature", 2)), invalid_argument);
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithCallback)
+	TEST_F(TCommandlineParser, Callback)
 	{
 		bool param1 = false;
 		bool param2 = false;
