@@ -49,8 +49,10 @@
     <ClInclude Include="include\toolslib\patterns\event.h" />
     <ClInclude Include="include\toolslib\patterns\observer.h" />
     <ClInclude Include="include\toolslib\patterns\serialize.h" />
-    <ClInclude Include="include\toolslib\string\Helpers.h" />
-    <ClInclude Include="include\toolslib\string\Wildcards.h" />
+    <ClInclude Include="include\toolslib\strings\Helpers.h" />
+    <ClInclude Include="include\toolslib\strings\numbers.h" />
+    <ClInclude Include="include\toolslib\strings\strton.h" />
+    <ClInclude Include="include\toolslib\strings\Wildcards.h" />
     <ClInclude Include="include\toolslib\toolslib_api.h" />
     <ClInclude Include="include\toolslib\toolslib_def.h" />
     <ClInclude Include="include\toolslib\utils\CommandlineParser.h" />
@@ -97,8 +99,9 @@
     <ClCompile Include="src\files\MemoryFile.cpp" />
     <ClCompile Include="src\files\ZIPFile.cpp" />
     <ClCompile Include="src\files\ZIPScanner.cpp" />
-    <ClCompile Include="src\string\Helpers.cpp" />
-    <ClCompile Include="src\string\Wildcards.cpp" />
+    <ClCompile Include="src\strings\Helpers.cpp" />
+    <ClCompile Include="src\strings\strton.cpp" />
+    <ClCompile Include="src\strings\Wildcards.cpp" />
     <ClCompile Include="src\utils\CommandlineParser.cpp" />
   </ItemGroup>
   <ItemGroup>
