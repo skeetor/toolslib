@@ -32,6 +32,9 @@ namespace toolslib
 		class TOOLSLIB_API CommandlineParser
 		{
 		public:
+			static const uint32_t UNLIMITED_ARGS = (uint32_t)-1;
+
+		public:
 			class TOOLSLIB_API Option
 			{
 				friend CommandlineParser;
@@ -281,6 +284,8 @@ namespace toolslib
 			 * This can be used when mixing paramters with names and without names.
 			 */
 			CommandlineParser(bool strict = true);
+			CommandlineParser(int argc, char **argv, bool strict = true);
+			CommandlineParser(const std::vector<std::string> &oArguments, bool strict = true);
 			virtual ~CommandlineParser();
 
 			/**
@@ -296,6 +301,7 @@ namespace toolslib
 			 */
 			bool parse(const std::vector<std::string>& argv);
 			bool parse(int argc, char *argv[]);
+			bool parse(void);
 
 			/**
 			 * Sets a header line, which is used for the help() method.
@@ -358,6 +364,7 @@ namespace toolslib
 			bool isStrict() const { return mStrict; }
 			void setStrict(bool strict = true) { mStrict = strict; }
 
+			std::vector<std::string> toArguments(int argc, char *argv[]);
 			const std::vector<Option>& getOptions() const;
 			const Option *findName(const std::string& oName) const;
 			const Option *findParam(const std::string& oName) const;
@@ -365,7 +372,11 @@ namespace toolslib
 			bool isParam(const std::string& param) const;
 
 		private:
+			void init(void);
+
+		private:
 			std::vector<Option> mOptions;
+			std::vector<std::string> mArguments;
 			bool mStrict : 1;
 			uint32_t mErrorIndex;
 			std::string mErrorParam;

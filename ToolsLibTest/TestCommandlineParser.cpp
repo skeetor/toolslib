@@ -11,8 +11,8 @@ using namespace toolslib::utils;
 namespace
 {
 	class TCommandlineParser
-	: public CommandlineParser
-	, public ::testing::Test
+		: public CommandlineParser
+		, public ::testing::Test
 	{
 	public:
 		TCommandlineParser() {}
@@ -47,7 +47,7 @@ namespace
 
 		vector<string> args =
 		{
-			"file1"
+			"TEST.EXE", "file1"
 		};
 		EXPECT_NO_THROW(parse(args));
 		o = &getUnnamed();
@@ -61,7 +61,7 @@ namespace
 		// Calling parse a second time will reset any previously parsed parameters
 		args =
 		{
-			"--param", "file2"
+			"TEST.EXE", "--param", "file2"
 		};
 		bool parsing = false;
 		EXPECT_NO_THROW((parsing = parse(args)));
@@ -89,7 +89,7 @@ namespace
 		EXPECT_EQ("s", option.param());
 	}
 
-	TEST_F(TCommandlineParser, ParamterNotGivenRelaxed)
+	TEST_F(TCommandlineParser, NotGivenRelaxed)
 	{
 		setStrict(false);
 
@@ -102,13 +102,13 @@ namespace
 		EXPECT_TRUE(parse(args));
 		args =
 		{
-			"test"
+			"TEST.EXE", "test"
 		};
 		EXPECT_TRUE(parse(args));
 		EXPECT_FALSE(hasArgument("enableFeature"));
 	}
 
-	TEST_F(TCommandlineParser, ParamterNotGivenStrict)
+	TEST_F(TCommandlineParser, NotGivenStrict)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.optional();
@@ -119,18 +119,18 @@ namespace
 		EXPECT_TRUE(parse(args));
 		args =
 		{
-			"test"
+			"TEST.EXE", "test"
 		};
 		EXPECT_FALSE(parse(args));
 		EXPECT_FALSE(hasArgument("enableFeature"));
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithNoArgs)
+	TEST_F(TCommandlineParser, NoArgs)
 	{
 		addOption("enableFeature", "s", "Path to the home directory");
 		vector<string> args =
 		{
-			"--enableFeature"
+			"TEST.EXE", "--enableFeature"
 		};
 
 		const vector<vector<string>> *params = nullptr;
@@ -144,12 +144,12 @@ namespace
 		ASSERT_EQ(0u, values->size());
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithNoArgsWrongName)
+	TEST_F(TCommandlineParser, NoArgsWrongName)
 	{
 		addOption("enableFeature", "s", "Path to the home directory");
 		vector<string> args =
 		{
-			"--enableFeatures"
+			"TEST.EXE", "--enableFeatures"
 		};
 
 		const vector<vector<string>> *params = nullptr;
@@ -163,7 +163,7 @@ namespace
 		addOption("enableFeature", "s", "Path to the home directory");
 		vector<string> args =
 		{
-			"--enableFeature", "--enableFeature"
+			"TEST.EXE", "--enableFeature", "--enableFeature"
 		};
 
 		EXPECT_FALSE(parse(args));
@@ -174,13 +174,13 @@ namespace
 		EXPECT_THROW(getArgument("enableFeature", 2), invalid_argument);
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithNoArgsMultiple)
+	TEST_F(TCommandlineParser, NoArgsMultiple)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.multiple();
 		vector<string> args =
 		{
-			"--enableFeature", "--enableFeature"
+			"TEST.EXE", "--enableFeature", "--enableFeature"
 		};
 
 		const vector<vector<string>> *params = nullptr;
@@ -199,19 +199,19 @@ namespace
 		EXPECT_THROW((values = &getArgument("enableFeature", 2)), invalid_argument);
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithSingleMissingArgument)
+	TEST_F(TCommandlineParser, SingleMissingArgument)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.arguments();
 		vector<string> args =
 		{
-			"--enableFeature"
+			"TEST.EXE", "--enableFeature"
 		};
 
 		EXPECT_FALSE(parse(args));
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMultipleTooMany1)
+	TEST_F(TCommandlineParser, MultipleTooMany1)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.multiple()
@@ -219,7 +219,7 @@ namespace
 			;
 		vector<string> args =
 		{
-			"--enableFeature", "1", "2"
+			"TEST.EXE", "--enableFeature", "1", "2"
 			,"--enableFeature", "0"
 		};
 
@@ -230,14 +230,14 @@ namespace
 		ASSERT_EQ(1u, params->size());
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMissingArgument)
+	TEST_F(TCommandlineParser, MissingArgument)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.arguments(2, 2)
 			;
 		vector<string> args =
 		{
-			"--enableFeature", "1"
+			"TEST.EXE", "--enableFeature", "1"
 		};
 
 		const vector<vector<string>> *params = nullptr;
@@ -247,7 +247,7 @@ namespace
 		ASSERT_EQ(1u, params->size());
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMultipleTooManyStrict)
+	TEST_F(TCommandlineParser, MultipleTooManyStrict)
 	{
 		setStrict(true);
 		addOption("enableFeature", "s", "Path to the home directory")
@@ -256,7 +256,7 @@ namespace
 			;
 		vector<string> args =
 		{
-			"--enableFeature", "1"
+			"TEST.EXE", "--enableFeature", "1"
 			,"--enableFeature", "0", "2"
 		};
 
@@ -267,7 +267,7 @@ namespace
 		ASSERT_EQ(2u, params->size());
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMultipleTooMany2)
+	TEST_F(TCommandlineParser, MultipleTooMany2)
 	{
 		// extra values at the end are considered unnamed arguments
 		setStrict(false);
@@ -278,7 +278,7 @@ namespace
 			;
 		vector<string> args =
 		{
-			"--enableFeature", "1"
+			"TEST.EXE", "--enableFeature", "1"
 			,"--enableFeature", "0", "2"
 		};
 
@@ -300,15 +300,15 @@ namespace
 		EXPECT_EQ(1u, getUnnamed().values().size());
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMultiple)
+	TEST_F(TCommandlineParser, MultipleSameParams)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.multiple()
 			.arguments()
-		;
+			;
 		vector<string> args =
 		{
-			"--enableFeature", "1"
+			"TEST.EXE", "--enableFeature", "1"
 			,"--enableFeature", "0"
 		};
 
@@ -330,7 +330,7 @@ namespace
 		EXPECT_THROW((values = &getArgument("enableFeature", 2)), invalid_argument);
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithMultipleUsingShortcut)
+	TEST_F(TCommandlineParser, MultipleUsingShortcut)
 	{
 		addOption("enableFeature", "s", "Path to the home directory")
 			.multiple()
@@ -338,7 +338,7 @@ namespace
 			;
 		vector<string> args =
 		{
-			"-s", "1"
+			"TEST.EXE", "-s", "1"
 			,"-s", "0"
 		};
 
@@ -360,7 +360,7 @@ namespace
 		EXPECT_THROW((values = &getArgument("enableFeature", 2)), invalid_argument);
 	}
 
-	TEST_F(TCommandlineParser, ParamterWithCallback)
+	TEST_F(TCommandlineParser, Callback)
 	{
 		bool param1 = false;
 		bool param2 = false;
@@ -408,7 +408,7 @@ namespace
 
 		vector<string> args =
 		{
-			"--param1", "0"
+			"TEST.EXE", "--param1", "0"
 			,"--param2", "1", "2"
 		};
 
